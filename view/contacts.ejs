@@ -5,15 +5,37 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Contacts</title>
+    <link rel="stylesheet" href="/style.css">
 </head>
 <body>
-    <ul>
-        <% contacts.forEach(contact => {%>
-            <li>
-                <h1><%= contact.first_name %> <%= contact.last_name %></h1>
-                <p> <%= contact.comment %> </p>
-            </li>
-        <%}); %>
-    </ul>
+    <header class="header">
+        <div class="header__logo">User Management</div>
+        <div class="header__path">/Home</div>
+        <form class="header__search search">
+            <fieldset class="search__searchField">
+                <input class="search__input" type="text" placeholder="Search...">
+                <button class="search__btn">Search</button>
+            </fieldset>
+        </form>
+    </header>
+    <main class="main">
+        <% if(contacts.length > 0) {%>
+        <div class="contacts">
+            <% contacts.forEach(({id, first_name, last_name, email, phone, comment, status}) => { %>
+                <div class="contact">
+                    <header class="contact__header"> <%= first_name %> <%= last_name %> </header>
+                    <ul class="contact__details">
+                        <li><%= email %></li>
+                        <li><%= phone %></li>
+                        <li><%= status %></li>
+                        <li><a href="/contact/<%=id%>">More Details</a></li>
+                    </ul>
+                </div>
+            <% }); %>    
+        </div>
+        <%}else{%>
+            <h2 class="warning">No contacts found</h2>
+        <%}%>
+    </main>
 </body>
 </html>
