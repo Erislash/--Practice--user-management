@@ -8,7 +8,7 @@ module.exports = (callback, data) => db((conn) => {
         phone,
         comment,
         status} = data;
-    console.log(first_name, last_name);
+        
     conn.query("INSERT INTO contacts VALUES(NULL, ?, ?, ?, ?, ?, ?, NOW())", [first_name, last_name, email, phone, comment, status])
     .then(contact => {
         console.log("New Contact Added");
